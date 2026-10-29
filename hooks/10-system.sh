@@ -24,7 +24,10 @@ cp -a /tmp/ittygos/overlay/. /
 chmod 755 /usr/local/bin/ittygos-* 2>/dev/null || true
 
 say "identity: os-release, issue, motd"
-dpkg-divert --local --rename --add /usr/lib/os-release >/dev/null
+# keep the package file out of the way without moving the essential file (re-runnable)
+if ! dpkg-divert --list /usr/lib/os-release | grep -q .; then
+	dpkg-divert --local --no-rename --divert /usr/lib/os-release.distrib --add /usr/lib/os-release >/dev/null
+fi
 cat > /usr/lib/os-release <<OSR
 PRETTY_NAME="ittyGOS $VERSION (based on Debian 13 trixie)"
 NAME="ittyGOS"

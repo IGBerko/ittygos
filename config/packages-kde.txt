@@ -21,7 +21,7 @@ dolphin
 konsole
 kate
 ark
-spectacle
+kde-spectacle|spectacle
 gwenview
 plasma-systemmonitor
 kio-extras
