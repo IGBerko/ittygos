@@ -36,4 +36,4 @@ HOME_URL="https://github.com/IGBerko/ittygos"
 BUG_REPORT_URL="https://github.com/IGBerko/ittygos/issues"
 OSR
 printf 'ittyGOS %s \\n \\l\n\n' "$VERSION" > /etc/issue
-printf '\n  ittyGOS %s - Debian 13 with KDE for games\n  Steam, Proton, Wine, Java 25, Python 3\n  Help: ittygos-help\n\n' "$VERSION" > /etc/motd
+printf '\n  ittyGOS %s - Debian 13 with KDE for games\n  Steam, Proton, Wine, Java 25/21, Python 3\n  Help: ittygos-help\n\n' "$VERSION" > /etc/motd
