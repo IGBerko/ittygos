@@ -53,6 +53,9 @@ need_root() {
 # ---------- setup ----------
 cmd_setup() {
 	need_root setup
+	if [ "$DRY_RUN" != 1 ] && ! command -v apt-get >/dev/null 2>&1; then
+		die "this host has no apt-get. Build on Debian or Ubuntu (for example WSL2 Ubuntu), not on Alpine/ittyOS"
+	fi
 	say "installing the build tools"
 	run apt-get update
 	run apt-get install -y debootstrap debian-archive-keyring squashfs-tools xorriso \
