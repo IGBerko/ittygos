@@ -179,7 +179,7 @@ cmd_iso() {
 		-comp zstd -Xcompression-level "$SQUASH_LEVEL" -b 1M \
 		-e proc sys dev run tmp
 
-	local append="boot=live components quiet splash username=gamer hostname=ittygos locales=$LIVE_LOCALE keyboard-layouts=$LIVE_LAYOUTS"
+	local append="boot=live components username=gamer hostname=ittygos locales=$LIVE_LOCALE keyboard-layouts=$LIVE_LAYOUTS"
 
 	say "BIOS boot (isolinux)"
 	run cp /usr/lib/ISOLINUX/isolinux.bin "$ISO_DIR/isolinux/"
@@ -201,6 +201,11 @@ LABEL safe
   MENU LABEL ittyGOS live (safe graphics)
   KERNEL /live/vmlinuz
   APPEND initrd=/live/initrd.img $append nomodeset
+
+LABEL text
+  MENU LABEL ittyGOS live (text mode, no desktop: for debugging)
+  KERNEL /live/vmlinuz
+  APPEND initrd=/live/initrd.img $append systemd.unit=multi-user.target
 EOF
 
 	say "UEFI boot (grub)"
@@ -215,6 +220,10 @@ menuentry "ittyGOS live" {
 }
 menuentry "ittyGOS live (safe graphics)" {
     linux /live/vmlinuz $append nomodeset
+    initrd /live/initrd.img
+}
+menuentry "ittyGOS live (text mode, no desktop: for debugging)" {
+    linux /live/vmlinuz $append systemd.unit=multi-user.target
     initrd /live/initrd.img
 }
 EOF
