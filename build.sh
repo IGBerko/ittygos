@@ -182,7 +182,8 @@ cmd_iso() {
 		-comp zstd -Xcompression-level "$SQUASH_LEVEL" -b 1M \
 		-wildcards -e 'proc/*' 'sys/*' 'dev/*' 'run/*' 'tmp/*'
 
-	local append="boot=live components username=gamer hostname=ittygos locales=$LIVE_LOCALE keyboard-layouts=$LIVE_LAYOUTS"
+	# live-config options: the new "live-config.*" names and the old short ones, both are harmless
+	local append="boot=live components live-config.username=gamer username=gamer live-config.hostname=ittygos hostname=ittygos live-config.locales=$LIVE_LOCALE locales=$LIVE_LOCALE live-config.keyboard-layouts=$LIVE_LAYOUTS keyboard-layouts=$LIVE_LAYOUTS"
 
 	say "BIOS boot (isolinux)"
 	run cp /usr/lib/ISOLINUX/isolinux.bin "$ISO_DIR/isolinux/"
