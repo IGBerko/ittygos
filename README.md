@@ -47,7 +47,7 @@ Change the system by editing:
 
 A VirtualBox virtual machine (4+ GB RAM, 3D acceleration on, EFI on or off, both work) is enough to check that the
 ISO boots and the desktop starts. Games need real hardware or GPU passthrough.
-Live user: `gamer` (no password, sudo allowed).
+Live user: `gamer`, password `live` (live-config default), sudo allowed.
 
 ## Commands in the system
 
