@@ -1,0 +1,4 @@
+# zram swap (zram-tools): compressed swap in RAM
+ALGO=zstd
+PERCENT=50
+PRIORITY=100

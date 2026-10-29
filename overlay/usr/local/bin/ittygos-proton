@@ -1,0 +1,48 @@
+#!/bin/bash
+# ittygos-proton - install Proton-GE (community Proton builds) for Steam
+#   ittygos-proton list              installed versions
+#   ittygos-proton install [TAG]     latest release, or a tag such as GE-Proton9-27
+#   ittygos-proton remove NAME
+# Steam (and Proton itself) are installed by Steam on its first start; this adds the GE builds.
+
+REPO="${PROTON_GE_REPO:-GloriousEggroll/proton-ge-custom}"
+API="${PROTON_GE_API:-https://api.github.com/repos/$REPO/releases}"
+DIR="${STEAM_COMPAT_DIR:-$HOME/.local/share/Steam/compatibilitytools.d}"
+
+die() { echo "error: $*" >&2; exit 1; }
+
+for t in curl jq tar sha512sum; do command -v "$t" >/dev/null 2>&1 || die "$t is required"; done
+
+case "${1:-}" in
+	list)
+		[ -d "$DIR" ] || { echo "nothing installed ($DIR)"; exit 0; }
+		ls -1 "$DIR" ;;
+	install)
+		tag="${2:-}"
+		if [ -n "$tag" ]; then url="$API/tags/$tag"; else url="$API/latest"; fi
+		json=$(curl -fsSL "$url") || die "cannot read $url (network?)"
+		name=$(printf '%s' "$json" | jq -r .tag_name)
+		tar_url=$(printf '%s' "$json" | jq -r '.assets[] | select(.name | endswith(".tar.gz")) | .browser_download_url' | head -n1)
+		sum_url=$(printf '%s' "$json" | jq -r '.assets[] | select(.name | endswith(".sha512sum")) | .browser_download_url' | head -n1)
+		[ -n "$tar_url" ] && [ "$tar_url" != null ] || die "no archive in the release $name"
+		[ -d "$DIR/$name" ] && { echo "$name is already installed"; exit 0; }
+		tmp=$(mktemp -d) || die "no temporary directory"
+		trap 'rm -rf "$tmp"' EXIT
+		echo "downloading $name"
+		curl -fL -# -o "$tmp/${tar_url##*/}" "$tar_url" || die "download failed"
+		if [ -n "$sum_url" ] && [ "$sum_url" != null ]; then
+			curl -fsSL -o "$tmp/sum" "$sum_url" || die "cannot get the checksum"
+			( cd "$tmp" && sha512sum -c sum >/dev/null 2>&1 ) || die "checksum mismatch: the download is damaged"
+			echo "checksum ok"
+		else
+			echo "warning: the release has no checksum file" >&2
+		fi
+		mkdir -p "$DIR"
+		tar -xzf "$tmp/${tar_url##*/}" -C "$DIR" || die "cannot unpack"
+		echo "installed: $name. In Steam: game -> Properties -> Compatibility -> pick it (restart Steam once)." ;;
+	remove)
+		[ -n "${2:-}" ] && [ -d "$DIR/$2" ] || die "usage: ittygos-proton remove NAME (see: ittygos-proton list)"
+		case "$2" in */*|.*) die "bad name" ;; esac
+		rm -rf "${DIR:?}/$2" && echo "removed $2" ;;
+	*) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//' ;;
+esac

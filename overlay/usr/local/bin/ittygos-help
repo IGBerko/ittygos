@@ -1,0 +1,14 @@
+#!/bin/sh
+cat <<'TXT'
+
+ittyGOS - Debian 13 + KDE for games
+
+  steam                 Steam (the first start downloads it; Proton comes with it)
+  ittygos-proton        Proton-GE: list | install [version] | remove NAME
+  lutris                Lutris (Wine, games from other stores)
+  gamemoderun <game>    performance mode for one game (Steam: gamemoderun %command%)
+  mangohud <game>       FPS overlay (Steam: mangohud %command%)
+  gamescope -- <game>   a separate game compositor (upscaling, frame limit)
+  java -version         Java 25      python3 --version   Python 3
+
+TXT

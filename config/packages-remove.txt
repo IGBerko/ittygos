@@ -1,0 +1,8 @@
+# Purged if they came in as dependencies (missing ones are ignored)
+plasma-discover
+plasma-discover-backend-flatpak
+plasma-discover-backend-fwupd
+kdeconnect
+plasma-welcome
+khelpcenter
+info

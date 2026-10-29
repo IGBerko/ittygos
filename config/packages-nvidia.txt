@@ -1,0 +1,6 @@
+# Only with WITH_NVIDIA=1 (proprietary driver, built with DKMS inside the chroot)
+linux-headers-amd64
+nvidia-kernel-dkms
+nvidia-driver
+nvidia-driver-libs:i386
+nvidia-settings

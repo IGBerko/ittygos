@@ -1,0 +1,34 @@
+# KDE Plasma without the extras (no Discover, no PIM, no office, no KDE games)
+plasma-desktop
+plasma-workspace
+kwin-x11
+kwin-wayland
+sddm
+sddm-theme-breeze
+plasma-nm
+plasma-pa
+powerdevil
+kscreen
+bluedevil
+systemsettings
+kde-config-gtk-style
+breeze
+breeze-gtk-theme
+xdg-desktop-portal-kde
+qt6-wayland
+xwayland
+dolphin
+konsole
+kate
+ark
+spectacle
+gwenview
+plasma-systemmonitor
+kio-extras
+udisks2
+firefox-esr
+fonts-noto-core
+fonts-liberation
+# installer
+calamares
+calamares-settings-debian
