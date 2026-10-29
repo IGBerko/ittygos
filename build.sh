@@ -175,9 +175,12 @@ cmd_iso() {
 	run cp "$initrd" "$ISO_DIR/live/initrd.img"
 
 	say "squashfs (zstd level $SQUASH_LEVEL): the slow step"
+	# the mount points must exist in the image (empty): exclude only their contents
+	for d in proc sys dev run tmp mnt media; do run mkdir -p "$CHROOT/$d"; done
+	run chmod 1777 "$CHROOT/tmp"
 	run mksquashfs "$CHROOT" "$ISO_DIR/live/filesystem.squashfs" -noappend \
 		-comp zstd -Xcompression-level "$SQUASH_LEVEL" -b 1M \
-		-e proc sys dev run tmp
+		-wildcards -e 'proc/*' 'sys/*' 'dev/*' 'run/*' 'tmp/*'
 
 	local append="boot=live components username=gamer hostname=ittygos locales=$LIVE_LOCALE keyboard-layouts=$LIVE_LAYOUTS"
 
