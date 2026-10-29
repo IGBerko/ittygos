@@ -8,7 +8,7 @@ ittyGOS - Debian 13 + KDE for games
   lutris                Lutris (Wine, games from other stores)
   gamemoderun <game>    performance mode for one game (Steam: gamemoderun %command%)
   mangohud <game>       FPS overlay (Steam: mangohud %command%)
-  gamescope -- <game>   a separate game compositor (upscaling, frame limit)
+  gamescope -- <game>   game compositor (upscaling, frame limit), if the release has it
   java -version         Java 25 (default)    python3 --version   Python 3
   Java 21 for Minecraft: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
                         (or: sudo update-alternatives --config java)

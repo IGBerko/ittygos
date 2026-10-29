@@ -13,7 +13,7 @@ It is built from a chroot with plain `debootstrap`, in the same spirit as [ittyO
 |---|---|
 | Base | Debian 13 trixie, kernel `linux-image-amd64`, systemd, NetworkManager, PipeWire, non-free firmware and microcode |
 | Desktop | KDE Plasma 6 (X11 and Wayland), SDDM, Dolphin, Konsole, Kate, Firefox ESR. No Discover, no PIM, no office, no KDE games |
-| Games | Steam (`steam-installer`, downloads Steam on first start; Proton comes from Steam), Wine, Lutris, GameMode, MangoHud, Gamescope, 32-bit graphics libraries |
+| Games | Steam (`steam-installer`, downloads Steam on first start; Proton comes from Steam), Wine, Lutris, GameMode, MangoHud, Gamescope (when Debian 13 has it), 32-bit graphics libraries |
 | Proton-GE | `ittygos-proton install` adds the community Proton-GE builds (checksum verified) |
 | Languages | Java 25 (`openjdk-25-jdk`, default) and Java 21 (`openjdk-21-jdk`, for Minecraft), Python 3 (Debian 13 ships 3.13), pip, venv, pipx |
 | Tuning | `vm.max_map_count` for games, zram swap (zstd), I/O scheduler per disk type, higher file limits, BBR, Baloo indexing off, faster boot |

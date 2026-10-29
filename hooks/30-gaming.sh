@@ -9,6 +9,8 @@ echo "steam steam/license note" | debconf-set-selections
 
 say "gaming packages"
 pkg_install "$CFG/packages-gaming.txt"
+say "optional packages"
+pkg_install_optional "$CFG/packages-optional.txt"
 
 if [ "${WITH_NVIDIA:-0}" = 1 ]; then
 	say "NVIDIA proprietary driver (DKMS)"

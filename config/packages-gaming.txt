@@ -3,7 +3,6 @@ steam-installer
 steam-devices
 gamemode
 mangohud
-gamescope
 lutris
 wine
 winetricks

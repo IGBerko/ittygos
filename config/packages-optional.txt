@@ -1,0 +1,3 @@
+# Installed when the release has them, skipped otherwise (no build failure)
+gamescope
+protontricks
